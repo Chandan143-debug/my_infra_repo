@@ -1,0 +1,32 @@
+pipeline {
+    agent any
+
+    stages {
+       stage("Checkout"){
+        steps {
+             git branch: 'main', credentialsId: 'ed2092b2-b890-41ae-8ae7-2b842d8fa186', url: 'https://github.com/Chandan143-debug/Terraform_test.git'
+         }
+       }
+}
+}
+       stage ("terraform init") {
+          steps {
+              sh ('terraform init'
+           }
+        }
+
+        stage ("plan"){
+           steps {
+               sh ('terraform plan')
+           }
+         }
+
+        stage ("Action"){
+           steps {
+               echo "Terraform action is ->($action)"
+               sh ('terraform ($action)--auto-approve')
+           }
+         }
+        
+ 
+
